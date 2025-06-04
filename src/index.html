@@ -1,22 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="styles.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus App</title>
-        <script type="module" src="/main.js" defer></script>
-    </head>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片水印工具</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>图片水印工具</h1>
+        
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7,10 12,15 17,10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <p>点击或拖拽图片到此处</p>
+                    <p class="upload-hint">支持 JPG、PNG、GIF 格式，可批量上传</p>
+                </div>
+                <input type="file" id="fileInput" multiple accept="image/*" hidden>
+            </div>
+        </div>
 
-    <body>
-        <main class="container">
-            <h1>Welcome to PakePlus</h1>
+        <div class="settings-section">
+            <h3>水印设置</h3>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label for="watermarkText">水印文字：</label>
+                    <input type="text" id="watermarkText" value="© 2024" placeholder="输入水印文字">
+                </div>
+                <div class="setting-item">
+                    <label for="fontSize">字体大小：</label>
+                    <input type="range" id="fontSize" min="12" max="72" value="24">
+                    <span id="fontSizeValue">24px</span>
+                </div>
+            </div>
+            <div class="generate-section">
+                <button class="generate-btn" id="generateBtn" disabled>生成水印图片</button>
+                <button class="clear-btn" id="clearBtn">清除所有图片</button>
+            </div>
+        </div>
 
-            <form class="row" id="greet-form">
-                <input id="greet-input" placeholder="Enter a name..." />
-                <button type="submit">Greet</button>
-            </form>
-            <p id="greet-msg"></p>
-        </main>
-    </body>
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <h3>预览和下载</h3>
+            <div class="preview-grid" id="previewGrid"></div>
+            <button class="download-all-btn" id="downloadAllBtn">下载所有图片</button>
+        </div>
+    </div>
+
+    <!-- 大图预览模态框 -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img class="modal-image" id="modalImage">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
